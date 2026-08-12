@@ -1,139 +1,44 @@
 # FocusSaga XP
 
-<p align="center">
-  <img src="assets/brand/focussaga-wordmark.png" alt="FocusSaga XP Logo" width="420"/>
-</p>
-
-<p align="center">
-  <b>Gamified study timer app where users focus, earn XP, level up characters, unlock seasons, and climb rankings.</b>
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Flutter-Mobile-blue?style=for-the-badge&logo=flutter"/>
-  <img src="https://img.shields.io/badge/Supabase-Backend-green?style=for-the-badge&logo=supabase"/>
-  <img src="https://img.shields.io/badge/Dart-Language-blue?style=for-the-badge&logo=dart"/>
-  <img src="https://img.shields.io/badge/Status-MVP%20Build-orange?style=for-the-badge"/>
-</p>
-
----
+A gamified study timer app where users complete focus sessions, earn XP, level up original characters, collect coins, unlock rewards, and compete in daily rankings.
 
 ## Overview
 
-**FocusSaga XP** is a Flutter-based gamified study timer app.
+FocusSaga XP is a Flutter-based mobile app designed to make studying feel rewarding and easy to continue.  
+Users set a study timer, complete focused sessions, earn XP, level up characters, receive coins, unlock store items, and track progress through challenges and rankings.
 
-The app helps users stay consistent by turning focused study sessions into a game-like progression system. Users set a timer, study, earn XP, level up characters, receive coins, unlock beautiful animated seasons/backgrounds, complete daily challenges, and compete on leaderboards.
+The app is built for students and self-learners who want motivation beyond a basic study timer.
 
-The goal is simple:
+## Core Idea
 
-> Make studying feel rewarding without making the app complicated.
+```mermaid
+flowchart LR
+    A[Set Study Timer] --> B[Start Focus Session]
+    B --> C[Complete Study Time]
+    C --> D[Earn XP]
+    D --> E[Character Level Up]
+    E --> F[Earn Coins]
+    F --> G[Unlock Store Items]
+    G --> H[Daily Challenges]
+    H --> I[Leaderboard Ranking]
+```
 
----
+## Key Features
 
-## Screenshots
-
-> Add your real screenshots inside `assets/screenshots/`.
-
-<p align="center">
-  <img src="assets/screenshots/focus.png" width="220" alt="Focus Screen"/>
-  <img src="assets/screenshots/characters.png" width="220" alt="Characters Screen"/>
-  <img src="assets/screenshots/store.png" width="220" alt="Store Screen"/>
-</p>
-
-<p align="center">
-  <img src="assets/screenshots/challenges.png" width="220" alt="Challenges Screen"/>
-  <img src="assets/screenshots/ranking.png" width="220" alt="Ranking Screen"/>
-  <img src="assets/screenshots/profile.png" width="220" alt="Profile Screen"/>
-</p>
-
----
-
-## Core Features
-
-- Anonymous Supabase auth for frictionless start
-- Optional profile name setup
-- Terms and Privacy acceptance flow
-- Tutorial/onboarding flow
-- Focus countdown timer
-- Timer presets: `25 min`, `50 min`, `2 hours`, custom timer
+- Google login using Supabase Auth
+- Terms and Privacy Policy acceptance
+- Beginner tutorial screens
+- Countdown study timer
+- Timer presets: 25 min, 50 min, 2 hours, custom
 - Pause, resume, and finish early
 - XP based on actual focused minutes
 - Character leveling system
-- 50 starting coins
-- 20 coins per level clear
-- Unlockable characters
-- Unlockable animated seasons/backgrounds
-- Unlockable timer skins
-- Unlockable reward animations
+- 50 starting coins for new users
+- 20 coins on every character level up
+- Store for characters, backgrounds, timer skins, and reward animations
 - Daily challenges
-- Daily and weekly leaderboard
-- Profile stats
-- Soft UI / Clean Pastel Minimal UI
-- Transparent/semi-transparent panels over animated backgrounds
-
----
-
-## Core App Flow
-
-```mermaid
-flowchart TD
-    A[Open App] --> B[Splash Screen]
-    B --> C{Supabase Session Exists?}
-    C -- No --> D[Anonymous Sign In]
-    C -- Yes --> E[Load Profile]
-    D --> E
-    E --> F{Profile Exists?}
-    F -- No --> G[Create Profile + 50 Coins]
-    F -- Yes --> H[Load Starter Items]
-    G --> H
-    H --> I{Terms Accepted?}
-    I -- No --> J[Terms and Privacy Screen]
-    I -- Yes --> K{Tutorial Completed?}
-    J --> K
-    K -- No --> L[Tutorial Screens]
-    K -- Yes --> M{Name Set?}
-    L --> M
-    M -- No --> N[Enter Display Name]
-    M -- Yes --> O[Main App]
-    N --> O
-```
-
----
-
-## Main Navigation
-
-```mermaid
-flowchart LR
-    A[Main App] --> B[Focus]
-    A --> C[Characters]
-    A --> D[Store]
-    A --> E[Challenges]
-    A --> F[Ranking]
-    A --> G[Profile]
-```
-
----
-
-## Game Loop
-
-```mermaid
-flowchart LR
-    A[Set Timer] --> B[Study Session]
-    B --> C{Timer Completed?}
-    C -- Yes --> D[XP + 20% Bonus]
-    C -- No --> E[XP for Actual Time]
-    D --> F[Character Gains XP]
-    E --> F
-    F --> G{Level Up?}
-    G -- Yes --> H[+20 Coins]
-    G -- No --> I[XP Bar Progress]
-    H --> J[Unlock Store Items]
-    I --> J
-    J --> K[Season / Character / Skin]
-    K --> L[Daily Challenge Progress]
-    L --> M[Leaderboard Points]
-```
-
----
+- Daily and weekly rankings
+- Profile and progress tracking
 
 ## Tech Stack
 
@@ -142,139 +47,130 @@ flowchart LR
 | Mobile App | Flutter |
 | Language | Dart |
 | Backend | Supabase |
-| Auth | Supabase Anonymous Auth |
+| Authentication | Supabase Auth + Google OAuth |
 | Database | Supabase Postgres |
 | Storage | Supabase Storage |
 | State Management | Riverpod |
 | Routing | go_router |
-| Images | Local assets + Supabase Storage |
-| Animation | Flutter CustomPainter / Animated Widgets |
-| Future Animation | Flame / Rive |
+| Legal Pages | Next.js / Vercel / GitHub Pages |
 | Version Control | GitHub |
 
----
+## App Flow
+
+```mermaid
+flowchart TD
+    A[Open App] --> B[Splash Screen]
+    B --> C{Logged In?}
+    C -- No --> D[Google Login]
+    C -- Yes --> E[Load User Profile]
+    D --> E
+    E --> F{Terms Accepted?}
+    F -- No --> G[Terms and Privacy Screen]
+    F -- Yes --> H{Tutorial Completed?}
+    G --> H
+    H -- No --> I[Tutorial Screens]
+    H -- Yes --> J[Main App]
+    I --> J
+    J --> K[Focus]
+    J --> L[Characters]
+    J --> M[Store]
+    J --> N[Challenges]
+    J --> O[Ranking]
+    J --> P[Profile]
+```
 
 ## System Architecture
 
 ```mermaid
 flowchart TB
-    subgraph Client["Flutter App"]
-        UI[UI Screens]
-        Router[go_router]
-        State[Riverpod Providers]
-        Services[Repository / Service Layer]
-        Cache[Local Cache]
-        Animations[Animated Background + Characters]
+    subgraph Flutter_App
+        A[UI Screens]
+        B[Riverpod Providers]
+        C[Service Layer]
+        D[Local Cache]
     end
 
-    subgraph Supabase["Supabase Backend"]
-        Auth[Anonymous Auth]
-        DB[(Postgres Database)]
-        Storage[Storage Buckets]
-        RLS[Row Level Security]
-        RPC[RPC Functions]
+    subgraph Supabase
+        E[Auth]
+        F[(Postgres Database)]
+        G[Storage Buckets]
+        H[Row Level Security]
     end
 
-    UI --> Router
-    UI --> State
-    State --> Services
-    Services --> Cache
-    Services --> Auth
-    Services --> DB
-    Services --> Storage
-    DB --> RLS
-    Services --> RPC
-    UI --> Animations
+    subgraph External
+        I[Google OAuth]
+        J[GitHub Repo]
+        K[Legal Pages]
+    end
+
+    A --> B
+    B --> C
+    C --> E
+    C --> F
+    C --> G
+    C --> D
+    E --> I
+    F --> H
+    J --> A
+    K --> A
 ```
 
----
-
-## Timer State Machine
+## Timer Flow
 
 ```mermaid
 stateDiagram-v2
     [*] --> Idle
-    Idle --> Running: Start
+    Idle --> Running: Start Timer
     Running --> Paused: Pause
     Paused --> Running: Resume
     Running --> Completed: Timer reaches zero
-    Running --> FinishedEarly: Finish early
-    Paused --> FinishedEarly: Finish early
+    Running --> FinishedEarly: Finish Early
+    Paused --> FinishedEarly: Finish Early
     Completed --> SaveSession
     FinishedEarly --> SaveSession
     SaveSession --> CalculateRewards
     CalculateRewards --> UpdateXP
     UpdateXP --> UpdateCoins
     UpdateCoins --> UpdateChallenges
-    UpdateChallenges --> UpdateLeaderboard
-    UpdateLeaderboard --> RewardSummary
+    UpdateChallenges --> RewardSummary
     RewardSummary --> Idle
 ```
 
----
+## Reward System
 
-## XP and Coin System
+### XP Rules
 
-| Rule | Value |
+| Action | Reward |
 |---|---|
-| Focused time | `1 XP / minute` |
-| Full completion bonus | `+20% XP` |
-| XP per level | `100 XP` |
-| Level reward | `20 coins` |
-| Starting coins | `50 coins` |
-| Max session length | `3 hours` |
-| Level cap | `50` |
-
-### XP Formula
-
-```text
-base_xp = actual_focused_minutes
-
-if completed == true:
-    final_xp = round(base_xp * 1.2)
-else:
-    final_xp = base_xp
-```
+| 1 focused minute | 1 XP |
+| Full timer completion | +20% XP bonus |
+| Character level up | +20 coins |
+| New user bonus | 50 coins |
+| Daily challenge complete | XP / coins / rank points |
 
 ### Example
 
 | Session | Actual Time | Completed | XP |
 |---|---:|---|---:|
-| Quick Focus | 25 min | Yes | 30 XP |
-| Deep Work | 120 min | Yes | 144 XP |
-| Early Finish | 18 min | No | 18 XP |
+| Short session | 25 min | Yes | 30 XP |
+| Deep session | 120 min | Yes | 144 XP |
+| Early finish | 18 min | No | 18 XP |
 
----
+## Character System
 
-## Reward Distribution
+Each character has:
 
-```mermaid
-pie title Reward Sources
-    "Study XP" : 50
-    "Level Coins" : 25
-    "Daily Challenges" : 15
-    "Streak Bonus" : 10
-```
+- Name
+- Rarity
+- Coin price
+- XP
+- Level
+- 5 evolution forms
+- Idle animation
+- Victory animation
+- Locked/unlocked state
 
----
-
-## Characters
-
-Characters are original mature fantasy/anime-inspired warriors.  
-No copyrighted anime, Marvel, DC, game, movie, or cartoon characters are used.
-
-### Character Types
-
-| Character | Theme | Style |
-|---|---|---|
-| Kairo | Flame Ronin | Muscular fire swordsman |
-| Tetsu | Iron Vanguard | Heavy armored warrior |
-| Rin | Storm Blade | Lightning dual-blade fighter |
-| Kuro | Shadow Assassin | Dark sword assassin |
-| Sora | Astral Champion | Cosmic sword warrior |
-| Arashi | Wind Samurai | Wind katana warrior |
-
-### Character Evolution
+Character evolution unlocks:
 
 ```mermaid
 flowchart LR
@@ -284,134 +180,77 @@ flowchart LR
     D --> E[Level 50: Max Form]
 ```
 
----
-
-## Animated Seasons
-
-FocusSaga XP uses unlockable global animated seasons.  
-Each season changes the full app background and creates a different mood.
-
-### Season Unlocks
-
-| Season | Status | Visual |
-|---|---|---|
-| Forest Morning | Free / Default | Trees, blurred mountains, falling leaves |
-| Rainy Window | Locked | Rain drops and soft blue mood |
-| Snow Pine | Locked | Snow, pine trees, distant mountains |
-| Sunset Garden | Locked | Warm sunset, petals, garden silhouettes |
-| Neon Night | Locked | Dark neon particles |
-| Cherry Blossom | Locked | Pink petals and soft spring background |
-| Celestial Aurora | Final Legendary | Aurora sky, cosmic particles, premium final unlock |
-
-### Season Unlock Flow
-
-```mermaid
-flowchart TD
-    A[Open Store] --> B[Go to Seasons]
-    B --> C[Select Season]
-    C --> D{Owned?}
-    D -- Yes --> E[Equip Season]
-    D -- No --> F{Enough Coins?}
-    F -- No --> G[Show Locked / Need Coins]
-    F -- Yes --> H[Buy Season]
-    H --> I[Deduct Coins]
-    I --> J[Add to Inventory]
-    J --> E
-    E --> K[Apply Globally to All Screens]
-```
-
----
-
-## Global Background System
-
-```mermaid
-flowchart TB
-    A[Selected Season in Profile] --> B[Season Provider]
-    B --> C[Global Background Wrapper]
-    C --> D[Animated CustomPainter Layer]
-    C --> E[Transparent Soft UI Layer]
-    E --> F[Current Screen Content]
-```
-
-Background rules:
-
-- One global background layer wraps all screens
-- UI cards are semi-transparent
-- Text remains readable
-- Particles are lightweight
-- Store previews stay static for performance
-- Only equipped season animates globally
-
----
+All characters must be original anime-inspired characters. Real anime, Marvel, DC, game, movie, or cartoon characters should not be used.
 
 ## Store System
 
 Store categories:
 
 - Characters
-- Seasons
 - Backgrounds
 - Timer skins
 - Reward animations
 
 ```mermaid
 flowchart TD
-    A[Store] --> B[Characters]
-    A --> C[Seasons]
-    A --> D[Timer Skins]
-    A --> E[Reward Animations]
-    B --> F[Buy or Equip]
-    C --> F
-    D --> F
-    E --> F
-    F --> G[Update Inventory]
-    G --> H[Update Profile Selection]
+    A[Open Store] --> B[Select Category]
+    B --> C[Select Item]
+    C --> D{Owned?}
+    D -- Yes --> E[Equip Item]
+    D -- No --> F{Enough Coins?}
+    F -- No --> G[Show Not Enough Coins]
+    F -- Yes --> H[Buy Item]
+    H --> I[Deduct Coins]
+    I --> J[Add Item to Inventory]
+    J --> K[Record Purchase]
+    K --> E
 ```
-
----
 
 ## Daily Challenges
 
 Example challenges:
 
 - Study 25 minutes today
-- Complete 2 sessions
-- Study 120 minutes total
-- Complete a session without pause
-- Level up a character
-- Unlock or equip a season
+- Complete 2 focus sessions
+- Study 120 minutes today
+- Complete one session without pause
+- Level up any character
+- Use a new background
 
 ```mermaid
 flowchart TD
     A[New Day] --> B[Assign Daily Challenges]
     B --> C[User Studies]
-    C --> D[Update Challenge Progress]
+    C --> D[Update Progress]
     D --> E{Challenge Complete?}
     E -- No --> C
     E -- Yes --> F[Claim Reward]
-    F --> G[Add XP / Coins / Rank Points]
+    F --> G[Add XP Coins Rank Points]
 ```
 
----
+## Leaderboard System
 
-## Leaderboard
-
-Leaderboard rank is based on real study activity, not coins or purchases.
+Ranking is based on real study activity.
 
 ```text
 rank_points = focused_minutes + challenge_bonus + streak_bonus
 ```
 
+Leaderboard types:
+
+- Daily leaderboard
+- Weekly leaderboard
+- Friends leaderboard later
+- Group/class leaderboard later
+
 ```mermaid
 flowchart LR
     A[Study Sessions] --> D[Rank Points]
-    B[Challenge Rewards] --> D
+    B[Daily Challenges] --> D
     C[Streak Bonus] --> D
     D --> E[Daily Ranking]
     D --> F[Weekly Ranking]
 ```
-
----
 
 ## Database Design
 
@@ -423,38 +262,28 @@ erDiagram
     profiles ||--o{ user_inventory : owns
     profiles ||--o{ store_purchases : makes
     profiles ||--o{ user_daily_challenges : tracks
-
     characters ||--o{ character_forms : has
     characters ||--o{ user_characters : unlocked_by
-
-    seasons ||--o{ user_inventory : unlocked_by
-    timer_skins ||--o{ user_inventory : unlocked_by
-    reward_animations ||--o{ user_inventory : unlocked_by
-
     daily_challenges ||--o{ user_daily_challenges : assigned_to
 ```
-
----
 
 ## Main Database Tables
 
 | Table | Purpose |
 |---|---|
-| profiles | User profile, coins, level, selected season |
-| terms_acceptance | Terms and privacy acceptance |
+| profiles | User profile, coins, level, selected items |
+| terms_acceptance | Terms and privacy acceptance records |
 | characters | Character catalog |
-| character_forms | Evolution forms |
+| character_forms | Character evolution forms |
 | user_characters | User-owned characters and XP |
-| seasons/backgrounds | Unlockable app backgrounds |
-| timer_skins | Timer styles |
-| reward_animations | Reward effects |
-| user_inventory | Owned items |
+| backgrounds | Background catalog |
+| timer_skins | Timer skin catalog |
+| reward_animations | Reward animation catalog |
+| user_inventory | Owned store items |
 | store_purchases | Purchase history |
 | study_sessions | Focus session records |
 | daily_challenges | Challenge templates |
 | user_daily_challenges | User challenge progress |
-
----
 
 ## Flutter Folder Structure
 
@@ -465,7 +294,6 @@ lib/
     app.dart
     router.dart
     theme.dart
-    app_shell.dart
   core/
     constants/
     utils/
@@ -490,118 +318,18 @@ lib/
     profile/
   shared/
     widgets/
-      season_background_widget.dart
-      soft_panel.dart
-      character_idle_widget.dart
     models/
     styles/
 ```
 
----
-
-## Asset Structure
-
-```text
-assets/
-  brand/
-    focussaga-wordmark.png
-    focussaga-icon.png
-
-  screenshots/
-    focus.png
-    characters.png
-    store.png
-    challenges.png
-    ranking.png
-    profile.png
-
-  characters/
-    kairo/
-      preview.png
-      form_1.png
-      form_2.png
-      form_3.png
-      form_4.png
-      form_5.png
-
-  seasons/
-    forest_morning/
-      preview.png
-    rainy_window/
-      preview.png
-    snow_pine/
-      preview.png
-    sunset_garden/
-      preview.png
-    neon_night/
-      preview.png
-    cherry_blossom/
-      preview.png
-    celestial_aurora/
-      preview.png
-```
-
----
-
-## Performance Strategy
-
-- Cache master data like characters, seasons, timer skins, and reward animations
-- Do not call Supabase inside widget build methods
-- Use Riverpod providers with loading/error/data states
-- Use `RepaintBoundary` around animated backgrounds
-- Keep particle count low
-- Use pagination for leaderboard
-- Use indexes on frequent query fields
-- Avoid infinite loading screens
-- Show retry buttons on errors
-
----
-
-## Security Rules
-
-- Users can read/write only their own profile data
-- Users can read public master data
-- Users cannot edit store catalog data
-- Store purchases are atomic
-- Duplicate purchases are blocked
-- Coins cannot go negative
-- Session rewards are guarded against double save
-- Leaderboard does not use paid coins or purchases
-
----
-
-## MVP Roadmap
-
-```mermaid
-gantt
-    title FocusSaga XP MVP Roadmap
-    dateFormat YYYY-MM-DD
-
-    section Foundation
-    Flutter Setup          :a1, 2026-08-12, 2d
-    Supabase Setup         :a2, after a1, 2d
-    Anonymous Auth         :a3, after a2, 2d
-    Terms Tutorial         :a4, after a3, 2d
-
-    section Core App
-    Focus Timer            :b1, after a4, 3d
-    XP Coins Levels        :b2, after b1, 3d
-    Characters             :b3, after b2, 4d
-    Store                  :b4, after b3, 4d
-
-    section Visual System
-    Seasons Backgrounds    :c1, after b4, 4d
-    Soft UI Polish         :c2, after c1, 3d
-
-    section Growth
-    Challenges             :d1, after c2, 3d
-    Ranking                :d2, after d1, 3d
-    Release Prep           :d3, after d2, 3d
-```
-
----
-
 ## Setup Requirements
+
+Required accounts:
+
+- GitHub
+- Supabase
+- Google Cloud Console
+- Vercel / GitHub Pages for legal pages
 
 Required tools:
 
@@ -609,62 +337,95 @@ Required tools:
 - Android Studio
 - VS Code
 - Git
-- Supabase account
-- GitHub account
+- Android emulator or Android phone
+- Java keytool
 
-Run project:
+Android package name:
 
-```bash
-flutter pub get
-flutter run
+```text
+com.startupzilla.focussagaxp
 ```
 
-Run in Chrome:
+## MVP Roadmap
 
-```bash
-flutter run -d chrome --web-port 50068
+```mermaid
+gantt
+    title FocusSaga XP MVP Roadmap
+    dateFormat YYYY-MM-DD
+    section Foundation
+    Flutter Setup          :a1, 2026-08-11, 2d
+    Supabase Setup         :a2, after a1, 2d
+    Google Auth            :a3, after a2, 3d
+    Terms and Tutorial     :a4, after a3, 2d
+    section Core App
+    Focus Timer            :b1, after a4, 3d
+    Session Saving         :b2, after b1, 2d
+    XP Coins Levels        :b3, after b2, 3d
+    Character System       :b4, after b3, 4d
+    Store System           :b5, after b4, 4d
+    section Growth
+    Daily Challenges       :c1, after b5, 3d
+    Ranking                :c2, after c1, 3d
+    Profile Polish         :c3, after c2, 3d
 ```
 
-Build Android App Bundle:
+## Build Milestones
 
-```bash
-flutter build appbundle --release
-```
+1. Flutter project setup
+2. Theme and routing
+3. Supabase connection
+4. Google login
+5. Profile creation
+6. Terms and Privacy screen
+7. Tutorial screens
+8. Main app shell
+9. Focus timer UI
+10. Timer logic
+11. Study session saving
+12. XP, coins, and level system
+13. Character system
+14. Store system
+15. Daily challenges
+16. Leaderboard
+17. Profile screen
+18. Testing and release preparation
 
----
+## Security Rules
+
+- Users can read and update only their own profile.
+- Users can read public store and character data.
+- Users can write only their own sessions, inventory, purchases, and challenge progress.
+- Users cannot edit master store items.
+- Leaderboard should expose only safe public profile data.
+- Paid coins should not affect ranking.
 
 ## Legal Rules
 
-This app should use only original assets.
+FocusSaga XP should use only original characters and assets.
 
 Do not use:
 
 - Real anime characters
 - Real anime transformation names
 - Marvel or DC characters
-- Movie/game/cartoon characters
+- Movie, game, or cartoon characters
 - Protected logos
-- Copied costume designs
-
----
+- Copied costumes or names
 
 ## Future Scope
 
-- Real Google login
 - Friends leaderboard
-- Class/group ranking
-- Flame sprite animations
-- Rive premium backgrounds
+- Group/class leaderboard
+- Seasonal events
 - Push notifications
 - Streak freeze
 - Parent/teacher reward dashboard
-- Premium cosmetic packs
-- Play Store release
-
----
+- Premium cosmetics
+- Admin panel
+- Analytics dashboard
 
 ## License
 
 No license selected yet.
 
-Before public release, decide whether the project should remain proprietary or use an open-source license such as MIT or Apache-2.0.
+Before public release, decide whether this project should remain proprietary or use an open-source license such as MIT or Apache-2.0.
