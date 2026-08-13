@@ -25,26 +25,6 @@ The goal is simple:
 
 ---
 
-## Screenshots
-
-Screenshots will be added after the first stable UI build.
-
-<!--
-After adding real screenshots, create this folder:
-
-assets/screenshots/
-
-Then uncomment this block:
-
-<p align="center">
-  <img src="assets/screenshots/focus.png" width="220" alt="Focus Screen" />
-  <img src="assets/screenshots/characters.png" width="220" alt="Characters Screen" />
-  <img src="assets/screenshots/store.png" width="220" alt="Store Screen" />
-</p>
--->
-
----
-
 ## Core Features
 
 - Anonymous Supabase auth for frictionless start
